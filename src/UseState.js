@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 const UseState = ({ name }) => {
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!!loading) {
+      setTimeout(() => {
+        console.log("Validacion");
+        setLoading(false);
+      }, [2000]);
+    }
+  }, [loading]);
 
   return (
     <div>
@@ -12,7 +22,7 @@ const UseState = ({ name }) => {
       {error && <p>Incorrect code</p>}
 
       <input type="text" placeholder="security code" />
-      <button onClick={() => setError((prevState) => !prevState)}>
+      <button onClick={() => setLoading((prevState) => !prevState)}>
         Check it out
       </button>
     </div>
