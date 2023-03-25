@@ -32,8 +32,8 @@ const UseState = ({ name }) => {
     <div>
       <h2>Delete {name}</h2>
       <p>Please, write the security code</p>
+      {loading && !error && <p>Loading...</p>}
       {error && <p>Incorrect code</p>}
-      {loading && <p>Cargando ...</p>}
       <input
         type="text"
         placeholder="security code"
