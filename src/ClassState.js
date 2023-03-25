@@ -22,7 +22,7 @@ class ClassState extends React.Component {
           this.setState({ error: true, loading: false });
         }
         console.log("validacion");
-      }, 3000);
+      }, 2000);
     }
   }
   render() {

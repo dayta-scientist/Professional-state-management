@@ -4,45 +4,61 @@ import { useState } from "react";
 const SECURITY_CODE = "paradigma";
 
 const UseState = ({ name }) => {
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState("");
+  const [state, setState] = useState({
+    value: "",
+    error: false,
+    loading: false,
+  });
 
   const onChangeValue = (event) => {
-    setValue(event.target.value);
+    // setValue(event.target.value);
+    setState({
+      ...state,
+      value: event.target.value,
+    });
   };
 
   useEffect(() => {
-    if (!!loading) {
+    if (!!state.loading) {
       setTimeout(() => {
         console.log("Validacion");
 
-        if (value === SECURITY_CODE) {
-          setLoading(false);
-          setError(false);
+        if (state.value === SECURITY_CODE) {
+          setState({
+            ...state,
+            loading: false,
+            error: false,
+          });
         } else {
-          setLoading(false);
-          setError(true);
+          setState({
+            ...state,
+            loading: false,
+            error: true,
+          });
         }
       }, [2000]);
     }
-  }, [loading]);
+  }, [state.loading]);
 
   return (
     <div>
       <h2>Delete {name}</h2>
       <p>Please, write the security code</p>
-      {loading && !error && <p>Loading...</p>}
-      {error && <p>Incorrect code</p>}
+      {state.loading && !state.error && <p>Loading...</p>}
+      {state.error && <p>Incorrect code</p>}
       <input
         type="text"
         placeholder="security code"
-        value={value}
+        value={state.value}
         onChange={onChangeValue}
       />
       <button
         onClick={() => {
-          setLoading(true);
+          // setLoading(true);
+          setState({
+            ...state,
+            loading: true,
+          });
         }}
       >
         Check it out
