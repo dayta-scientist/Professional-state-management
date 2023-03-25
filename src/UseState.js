@@ -8,6 +8,8 @@ const UseState = ({ name }) => {
     value: "",
     error: false,
     loading: false,
+    deleted: false,
+    confirmed: false,
   });
 
   const onChangeValue = (event) => {
@@ -28,6 +30,7 @@ const UseState = ({ name }) => {
             ...state,
             loading: false,
             error: false,
+            confirmed: true,
           });
         } else {
           setState({
@@ -40,31 +43,78 @@ const UseState = ({ name }) => {
     }
   }, [state.loading]);
 
-  return (
-    <div>
-      <h2>Delete {name}</h2>
-      <p>Please, write the security code</p>
-      {state.loading && !state.error && <p>Loading...</p>}
-      {state.error && <p>Incorrect code</p>}
-      <input
-        type="text"
-        placeholder="security code"
-        value={state.value}
-        onChange={onChangeValue}
-      />
-      <button
-        onClick={() => {
-          // setLoading(true);
-          setState({
-            ...state,
-            loading: true,
-          });
-        }}
-      >
-        Check it out
-      </button>
-    </div>
-  );
+  if (!state.deleted && !state.confirmed) {
+    return (
+      <div>
+        <h2>Delete {name}</h2>
+        <p>Please, write the security code</p>
+        {state.loading && !state.error && <p>Loading...</p>}
+        {state.error && <p>Incorrect code</p>}
+        <input
+          type="text"
+          placeholder="security code"
+          value={state.value}
+          onChange={onChangeValue}
+        />
+        <button
+          onClick={() => {
+            // setLoading(true);
+            setState({
+              ...state,
+              loading: true,
+            });
+          }}
+        >
+          Check it out
+        </button>
+      </div>
+    );
+  } else if (!!state.confirmed && !state.deleted) {
+    return (
+      <>
+        <p>Are you sure?</p>
+        <button
+          onClick={() => {
+            setState({
+              ...state,
+              deleted: true,
+            });
+          }}
+        >
+          Yes, eliminate
+        </button>
+        <button
+          onClick={() => {
+            setState({
+              ...state,
+              confirmed: false,
+            });
+          }}
+        >
+          No, I regretted it
+        </button>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <p>Deleted successfully</p>
+
+        <button
+          onClick={() => {
+            setState({
+              ...state,
+              confirmed: false,
+              deleted: false,
+              value: "",
+            });
+          }}
+        >
+          Reset, go back
+        </button>
+      </>
+    );
+  }
 };
 
 export { UseState };
