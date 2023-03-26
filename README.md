@@ -1,3 +1,20 @@
+Personal practice after completing the course: Professional Management of the State in Platzi (https://platzi.com/cursos/react-estado/)
+
+In this course you learn:
+
+• Learn about the evolution of components in React
+
+• Discover different ways to create and update the state in React
+
+• Analyzes imperative, declarative, independent, compound and dynamic states
+
+• Speed up the maintenance and readability of your components
+
+
+
+Platzi is a Latin American online education platform
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
